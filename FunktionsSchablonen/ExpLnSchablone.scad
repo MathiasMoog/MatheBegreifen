@@ -27,7 +27,7 @@ xmax=2;
 ymin=exp(xmin);     // y (y=exp(x)) Intervall in cm
 ymax=exp(xmax);
 d=1.5;              // Dicke der Schablone
-f="Liberation Sans"; // Font
+f="Allerta Stencil"; // Stencil Font, sonst Problem mit dem e
 
 // Erstelle die Schablone in 2D als Ebene mit Löchern für 
 // die Achsen, Kerben auf den Rändern zum Messen und den
@@ -64,7 +64,7 @@ module schablone2D() {
          text(text="ln(x)", font=f, size=fh*0.7 ); }; };
    } // Ende Difference
    // Das "e" reparieren, todo Font zum Fräsen suchen
-   translate([-13.5,62]){ square([1,2]);}
+   //translate([-13.5,62]){ square([1,2]);}
 }
 
 
@@ -115,7 +115,8 @@ difference() {
   translate(v=[8,50,d/2]){
     rotate(90){
       linear_extrude(height=d){ 
-        color("black"){text(text="© Moog",halign="right", font=f, size=4 );}
+        // Hier kein Stencil Font, Allerta Stencil hat kein Copyright Zeichen
+        color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=4 );}
       }
     }
   }

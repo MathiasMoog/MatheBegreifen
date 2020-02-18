@@ -20,44 +20,13 @@
 // Diverse Vorlagen laden
 include <../MatheBegreifen.scad>
 
+// Die Parabel Vorlage laden
+include <Parabel.scad>
+
 
 // Skalierungen
 s=10;                 // Längeneinheit der Schablone 1 cm, scad mm
-xmin=-3;              // x (y=x*x) Intervall in cm
-xmax=3;
-ymin=pow(xmin,2);     // y (y=x*x) Intervall in cm
-ymax=pow(xmax,2);
 d=1.5;                // Dicke der Schablone
-f="Liberation Sans";  // Font
-
-// Erstelle die Schablone in 2D als Ebene mit Löchern für 
-// die Achsen, Kerben auf den Rändern zum Messen und den
-// Beschriftung x^2 und sqrt(x)
-module schablone2D() {
-   // die quadrat Funktion von xmin bis xmax in 0.1 mm Schritten
-   points = [ 
-     for(x=[xmin:.1:xmax]) [s*x,s*pow(x,2)],
-     [s*xmax,s*ymax] ];
-   // Löcher in die Schablone  
-   difference() {
-     // Die Schablone selbst
-     polygon(points);
-     // Sichtfenster y-Achse
-     for(y=[1:8]) {
-       polygon( [ [-0.7,s*y+3], [0.7,s*y+3], [0.7,s*y+7], [-0.7,s*y+7]]);
-     }
-     // Text ausschneiden
-     fh=8; // Texthöhe
-     // x^2 basteln
-     translate([-15,70]){ text(text="x", font=f, size=fh ); }; 
-     translate([-8,75]){ text(text="2", font=f, size=fh*0.7 ); };
-     // Spiegelverkehrt sqrt(x) schreiben
-     translate([5,65]){ rotate([180,0,90]){ 
-         text(text="sqrt(x)", font=f, size=fh*0.7 ); }; };
-   } // Ende Difference
-   // Das "e" reparieren, todo Font zum Fräsen suchen
-   translate([-13.5,72]){ square([1,2]);}
-}
 
 
 /* Extrudiere aus der schablone in 2D eine 2D Schablone mit abgescrägten 
@@ -76,7 +45,7 @@ module schablone3D() {
         de=-abs(z-0.5*d);
         //echo(de);
         offset(delta=de){  
-          schablone2D();
+          schablone2D( s, font="Allerta Stencil" );
         }
       }
     }
