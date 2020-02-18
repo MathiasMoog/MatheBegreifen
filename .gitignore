@@ -1,0 +1,10 @@
+# Zu ignorierende Dateien für das git Projekt
+#
+# Erzeugte Grafiken
+*.png
+# Erzeugte STL Dateien
+*.stl
+# Erzeugte Daten Dateien von Octave
+*.dat
+# Cura Einstellungen
+*.3mf
