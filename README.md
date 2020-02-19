@@ -19,12 +19,15 @@ Die druckbaren Objekte habe ich an der Hochschule Ansbach auf [Ultimaker](https:
 
 Den gcode für die Drucker erzeuge ich immer mit [Cura](https://ultimaker.com/software/ultimaker-cura "Cura"). Für die Schablonen muss eine sehr gute Qualität verwendet werden, damit die Schriften herauskommen. Die Funktionsflächen können in einer groben Auflösung gedruckt werden, dann geht es etwas schneller. Für viele der Objekte habe ich Cura den Support aktiviert.
 
+An einzelnen Stellen habe ich Formeln als Relief gedruckt. Die Erzeugung dieser Reliefs läuft über Octave, Latex ( ich verwende [MikTex](https://miktex.org/ "MikTex")) und [ImageMagick](https://imagemagick.org/ "ImageMagick"). Die so entstandene Bild (png) Datei importiere ich in OpenSCAD. 
+
 ## Überblick ##
 
 Im Stammverzeichnis liegt nur eine SCAD Datei, die allgemeine Definitionen enthält. Sie wird für die meisten Objekte benötigt.
 
 * FunktionsFlaechen - Flächen die durch Funktionen über der Ebene erzeugt werden
 * FunktionsSchablonen - Schablonen zum Zeichnen von Funktionen
+* Technik - Kleine technische Objekte, die in der Ingenieurmathematik als Anwendung vorkommen
 
 
 ### Schablonen ###
@@ -43,10 +46,19 @@ Einige sind zerlegbar, so z.B der Roationsparaboloid, der damit auch als Parabel
 
 Diese Objekte sind in der Regel mit der Einheit von 1 cm erstellt und so gewählt, dass die auf einem "normalen" 3D Drucker gedruckt werden können.
 
+### Technik ###
+
+Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. Abrollkurven.
+
 ## Nachwort ##
+
+Mein Dank gilt den Kollegen, Labormitarbeiter und Studierenden die mich mit Ideen und in der praktischen Umsetzung unterstützt haben.
+
+Für Verbesserungsvorschläge, Erweiterungen und Links zu anderen passenden Objekten für den Mathematik Unterricht bin ich dankbar.
+
+Vermutlich sind in den Tiefen des Netzes noch weitere ähnliche Projekte zu finden. Aber als ich danach suchte habe ich leider kein passendes Projekt gefunden. Für entsprechende Links bin ich dankbar, dann brauche ich nicht alles selber zu zeichnen.
 
 Die OpenSCAD und Octave Skripte lassen sich aus meiner Sicht am besten mit git verwalten. Daher liegt dieses Archiv auch auf [GitHub](https://github.com/MathiasMoog "GitHub, Mathias Moog"). Ausgewählte 3D Objekte habe ich zusätzlich auf [Thingiverse](https://www.thingiverse.com/Moogi/about "Thingiverse, Mathias Moog") als STL veröffentlicht. Dort sind die STLs schön visualisiert und ich habe einige Fotos hochgeladen.
 
-Für Verbesserungsvorschläge, Erweiterungen und Links zu anderen passenden Objekten für den Mathematik Unterricht bin ich dankbar.
 
 

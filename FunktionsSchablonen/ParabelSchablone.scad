@@ -76,7 +76,7 @@ difference() {
   translate(v=[8,59,d/2]){
     rotate(90){
       linear_extrude(height=d){ 
-        color("black"){text(text="© Moog",halign="right", font=f, size=4 );}
+        color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=4 );}
       }
     }
   }
