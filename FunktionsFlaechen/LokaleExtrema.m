@@ -78,7 +78,7 @@ fprintf(fid,"r=%f; // Halbe Kanntelänge der Grundfläche\n",r);
 fclose(fid);
 
 % Erzeuge ein PNG der Formel
-latex2png( ['f(x,y) = ' latex(g) ], 'LokaleExtremaF' );
+latex2png( ['f(x,y) = ' latex(f) ], 'LokaleExtremaF' );
 
 
 

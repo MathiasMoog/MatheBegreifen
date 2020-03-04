@@ -20,8 +20,8 @@ include <Parabel.scad>
 
 
 // Skalierungen
-s=100;                // Längeneinheit der Schablone 1 dm, scad mm
-d=1.5;                // Dicke der Schablone
+s=100;   // Längeneinheit der Schablone 1 dm, scad mm
+fd = 0;  // Durchmesser des Fräsers, An Kante entlang fräsen
 
 
 //----------------------------------------------------
@@ -30,37 +30,17 @@ d=1.5;                // Dicke der Schablone
 
 // Jetzt noch den vertieften Text in der Oberfläche
 // Von oben mit d/2 in die Schablone versenken
-difference() {
+offset( r=fd/2, delta=fd/2 ) difference() {
   // Schablone selbst
   color("red"){schablone2D( s, "Allerta Stencil" );}
 
-  // Hochschul Logo platzieren
-  translate(v=[-30,590,0]){
-    rotate(90){
-      scale(4){    
-        hs_ansbach("Allerta Stencil");
-      }
-    }
+  // Hochschul Logo (fräsbar) platzieren
+  translate(v=[-30*s/100,590*s/100,0]) rotate(90) scale(4*s/100){    
+    hs_ansbach_fraese("Allerta Stencil");
   }
   // Mich selbst verewigen
-  translate(v=[80,590,0]){
-    rotate(90){
-      color("black"){text(text="(C) Moog",halign="right", font="Allerta Stencil", size=40 );}
-    }
-  }
+  translate(v=[80*s/100,590*s/100,0]) rotate(90) color("black"){
+    text(text="(C) Moog",halign="right", font="Allerta Stencil", size=40*s/100 );}
 }
-
-// Die Ecken der Quadrate im Logo verbinden.
-// An dem Logo lässt sich die Schablone gut halten.
-color("red") {
-  translate(v=[-30,590,0]){
-    rotate(90){
-      scale(4){    
-       hs_ansbach_fraese();
-      }
-    }
-  }
-}
-
 
 

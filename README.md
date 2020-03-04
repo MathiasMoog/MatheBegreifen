@@ -50,6 +50,37 @@ Diese Objekte sind in der Regel mit der Einheit von 1 cm erstellt und so gewähl
 
 Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. Abrollkurven.
 
+## Erfahrungen ##
+
+* Schriften sind aufwändig zu Rendern, Drucken und Fräsen. Entwürfe sind ohne Schrift viel schneller fertig
+* Formeln
+   * Der Prozess: 
+     1. Octave erzeugt aus Latex Formel ein png. Dazu wird ein kurzes Latex Dokument (Klasse standalone) erstellt
+	 2. Das png wird in OpenSCAD mit surface geladen. Dabei die Invert Option verwenden um den Text zu erhalten. Die x und y Abmessungen entsprechen den Pixeln, z dem Grauwert skaliert auf 0 bis 100 (invertiert 0 bis -100)
+	 3. In OpenSCAD den durchangängen Boden (z Position -100) abschneiden damit nur die Schrift übrig bleibt.
+   * Formeln sind sehr filigran und schwer zu drucken / fräsen. 
+   
+   
+   
+### Drucken ###
+
+
+
+* "Gravierte" Texte: 
+    * Mindesthöhe 6 mm für normale Fonts, Latex Formeln größer, die sind deutlich feiner
+	* 3 bis 5 mm einsinken lassen, mehr ist nicht notwendig
+	
+* "Gestanzte" Texte:
+    * Stencil Schriftart notwendig. Ich verwende [Allerta Stencil]( https://www.1001freefonts.com/allerta-stencil.font "Allerta Stencil") von Matt McInerney, OLF Lizenz
+	* Mindestgröße 8 mm, in Cura Shell / Print Thins Walls aktivieren damit die Durchbrüche mit gedruckt werden. 
+	* Latex Formeln lassen sich nicht stanzen
+
+### Fräsen ###
+
+### Didaktik ###
+
+* Mehrere drucken, damit es schneller durch die Reihen läuft
+
 ## Nachwort ##
 
 Mein Dank gilt den Kollegen, Labormitarbeiter und Studierenden die mich mit Ideen und in der praktischen Umsetzung unterstützt haben.
@@ -61,4 +92,9 @@ Vermutlich sind in den Tiefen des Netzes noch weitere ähnliche Projekte zu find
 Die OpenSCAD und Octave Skripte lassen sich aus meiner Sicht am besten mit git verwalten. Daher liegt dieses Archiv auch auf [GitHub](https://github.com/MathiasMoog "GitHub, Mathias Moog"). Ausgewählte 3D Objekte habe ich zusätzlich auf [Thingiverse](https://www.thingiverse.com/Moogi/about "Thingiverse, Mathias Moog") als STL veröffentlicht. Dort sind die STLs schön visualisiert und ich habe einige Fotos hochgeladen.
 
 
+### Anmerkung zur CC-BY-NC-SA Lizenz ###
+
+Auf vielen Objekten ist mein Name und das Logo der Hochschule Ansbach enthalten. Ich nutze sie auch als "Werbeartikel" und außerdem finden sie so leichter den Weg zu mir zurück.
+
+Unbeschadet der Lizenz darf sowohl mein Name als auch das Logo in Nachdrucken entfernt werden. Nicht dass die im Verlustfall alle per Post bei mir ankommen ...
 

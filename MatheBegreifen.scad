@@ -36,17 +36,27 @@ module hs_ansbach(font="Liberation Sans") {
 }
 
 // Verbinde die Quadrate für die Fräse
-module hs_ansbach_fraese() {
+// Fräsbares Logo, dafür ist ein Stencil Font notwendig.
+module hs_ansbach_fraese(font="Allerta Stencil") {    
  a=6; // Kantenlänge Quadrate
  tl=12; // Text Zeilenabstand
- 
- translate( [0.5*a,2*tl]) { rotate(45){square( size=a*.3, center=true );} }
- translate( [0.5*a,2*tl+a]) { rotate(45){square( size=a*.3, center=true );} }
- translate( [1.5*a,2*tl]) { rotate(45){square( size=a*.3, center=true );} }
- translate( [1.5*a,2*tl+a]) { rotate(45){square( size=a*.3, center=true );} }
+    
+ difference(){
+   // Das Logo
+   hs_ansbach(font);
+   // Quadrate miteinander verbinden 
+   translate( [0.5*a,2*tl]) { rotate(45){square( size=a*.3, center=true );} }
+   translate( [0.5*a,2*tl+a]) { rotate(45){square( size=a*.3, center=true );} }
+   translate( [1.5*a,2*tl]) { rotate(45){square( size=a*.3, center=true );} }
+   translate( [1.5*a,2*tl+a]) { rotate(45){square( size=a*.3, center=true );} }
+  }
 }
+
+
 
 // Nur zum Probieren einkommentieren
 //hs_ansbach();
 //hs_ansbach( "Allerta Stencil" );
 //hs_ansbach_fraese();
+//include <test.scad>;
+//test_formel(20);

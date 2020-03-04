@@ -15,6 +15,7 @@
 
 // Diverse Vorlagen laden
 include <../MatheBegreifen.scad>
+include <LokaleExtremaF.scad>
 
 
 // Einstellung, mit Octave Abgleichen
@@ -41,13 +42,8 @@ difference() {
   // Jetzt noch die Beschriftung der Funktion abziehen
   // Hm, der Text ist zu filigran für den 3D Drucker
   // Und das rendern dauert ewig
-  translate(v=[r*sxy+1,-r*sxy+5,5]){scale(0.022) { rotate([90,0,90]){
-   // Dafür muss die unterkante des PNG weg .. 
-   intersection(){
-     surface(file = "LokaleExtremaF.png" , invert = true);
-     translate([0,0,-98]){cube([5000,200,100]);}
-   }
-  } } }
+  //translate(v=[r*sxy-h,-r*sxy+5,5]) rotate([90,0,90]){
+  // linear_extrude( height=h+1 ) LokaleExtremaF_formel(3);
+  //} 
 }
-
 
