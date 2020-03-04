@@ -19,7 +19,7 @@ Die druckbaren Objekte habe ich an der Hochschule Ansbach auf [Ultimaker](https:
 
 Den gcode für die Drucker erzeuge ich immer mit [Cura](https://ultimaker.com/software/ultimaker-cura "Cura"). Für die Schablonen muss eine sehr gute Qualität verwendet werden, damit die Schriften herauskommen. Die Funktionsflächen können in einer groben Auflösung gedruckt werden, dann geht es etwas schneller. Für viele der Objekte habe ich Cura den Support aktiviert.
 
-An einzelnen Stellen habe ich Formeln als Relief gedruckt. Die Erzeugung dieser Reliefs läuft über Octave, Latex ( ich verwende [MikTex](https://miktex.org/ "MikTex")) und [ImageMagick](https://imagemagick.org/ "ImageMagick"). Die so entstandene Bild (png) Datei importiere ich in OpenSCAD. 
+An einzelnen Stellen habe ich Formeln als Relief gedruckt. Die Erzeugung dieser Reliefs läuft über Octave und Latex ( ich verwende [MikTex](https://miktex.org/ "MikTex")). Die so entstandene svg Datei importiere ich in OpenSCAD. 
 
 ## Überblick ##
 
@@ -55,16 +55,13 @@ Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. A
 * Schriften sind aufwändig zu Rendern, Drucken und Fräsen. Entwürfe sind ohne Schrift viel schneller fertig
 * Formeln
    * Der Prozess: 
-     1. Octave erzeugt aus Latex Formel ein png. Dazu wird ein kurzes Latex Dokument (Klasse standalone) erstellt
-	 2. Das png wird in OpenSCAD mit surface geladen. Dabei die Invert Option verwenden um den Text zu erhalten. Die x und y Abmessungen entsprechen den Pixeln, z dem Grauwert skaliert auf 0 bis 100 (invertiert 0 bis -100)
-	 3. In OpenSCAD den durchangängen Boden (z Position -100) abschneiden damit nur die Schrift übrig bleibt.
+     1. Octave erzeugt aus Latex Formel ein svg. Dazu wird ein kurzes Latex Dokument (Klasse standalone) erstellt
+	 2. Das svg wird in OpenSCAD mit import geladen. 
    * Formeln sind sehr filigran und schwer zu drucken / fräsen. 
    
    
    
 ### Drucken ###
-
-
 
 * "Gravierte" Texte: 
     * Mindesthöhe 6 mm für normale Fonts, Latex Formeln größer, die sind deutlich feiner
@@ -76,6 +73,8 @@ Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. A
 	* Latex Formeln lassen sich nicht stanzen
 
 ### Fräsen ###
+
+
 
 ### Didaktik ###
 

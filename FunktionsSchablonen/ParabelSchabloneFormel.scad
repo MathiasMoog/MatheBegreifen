@@ -25,42 +25,20 @@ use <Parabel.scad>
 
 
 // Skalierungen
+xmax=3;               // Maximaler x Wert
 s=10;                 // Längeneinheit der Schablone 1 cm, scad mm
-d=1.5;                // Dicke der Schablone
-xmax=3;
-font="Allerta Stencil";
-
-// Erstelle die Schablone in 2D als Ebene mit Löchern für 
-// die Achsen, Kerben auf den Rändern zum Messen und den
-// Beschriftung x^2 und sqrt(x)
-module schablone2D(  ) {
-   difference() {
-     // Umiss
-     parabelUmriss( xmax=xmax, s=s );
-     // Fenster ausschneiden
-     parabelFenster( xmax=xmax, s=s);
-     // Text ausschneiden
-     fh=s*.8; // Texthöhe
-     // x^2 basteln
-     translate([-s*1.5,s*7.0]){ text(text="x", font=font, size=fh ); }; 
-     translate([-s*.8 ,s*7.5]){ text(text="2", font=font, size=fh*0.7 ); };
-     // Spiegelverkehrt sqrt(x) schreiben
-     translate([s*.5,s*6.2]){ rotate([180,0,90]){ 
-         text(text="sqrt(x)", font=font, size=fh*0.7 ); }; };
-   } // Ende Difference   
-}
-
+d=1.2;                // Dicke der Schablone in mm
 
 
 /* Extrudiere aus der schablone in 2D eine 2D Schablone mit abgescrägten 
    Kanten.
 */
 module schablone3D() {
-  schraegeKanten( d, 0.05) schablone2D( ); 
+  schraegeKanten( d, 0.05) parabelStanz( xmax, s ); 
 }
 
 //----------------------------------------------------
-// Schablone erzeugen, mit Prägung in der Oberfläche
+// Schablone erzeugen
 
 
 // Jetzt noch den vertieften Text in der Oberfläche
@@ -70,20 +48,20 @@ difference() {
   color("red"){schablone3D();}
 
   // Hochschul Logo platzieren
-  translate(v=[-3,59,d/2]){
+  translate(v=[-3,65,0]){
     rotate(90){
       linear_extrude(height=d){ 
-        scale(0.4){    
+        scale(0.45){    
           hs_ansbach();
         }
       }
     }
   }
   // Mich selbst verewigen
-  translate(v=[8,59,d/2]){
+  translate(v=[12,65,0]){
     rotate(90){
       linear_extrude(height=d){ 
-        color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=4 );}
+        color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=6 );}
       }
     }
   }

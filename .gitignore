@@ -8,3 +8,7 @@
 *.dat
 # Cura Einstellungen
 *.3mf
+# Erzeugte svg Dateien
+*.svg
+# Erzugte dxf Dateien
+*.dxf

@@ -77,8 +77,8 @@ fprintf(fid,"d=%f; // Abstand der Punkte\n",mean(diff(txy)));
 fprintf(fid,"r=%f; // Halbe Kanntelänge der Grundfläche\n",r);
 fclose(fid);
 
-% Erzeuge ein PNG der Formel
-latex2png( ['f(x,y) = ' latex(f) ], 'LokaleExtremaF' );
+% Erzeuge ein svg der Formel
+latex2svg( ['f(x,y) = ' latex(f) ], 'LokaleExtremaF' );
 
 
 

@@ -52,6 +52,34 @@ module hs_ansbach_fraese(font="Allerta Stencil") {
   }
 }
 
+/* Extrudiere aus der schablone in 2D eine 3D Schablone mit abgescrägten 
+   Kanten.
+   Schön wäre es wenn linear_extrude auch eine offset Option hätte,
+   die ist auch schon in Arbeit:
+     https://github.com/openscad/openscad/pull/2079
+   Bis die fertig ist erzeuge viele kleine Scheiben mit offset. Im 3D Druck
+   kommt das aufs gleiche hinaus.
+
+   Einziger Nachteil, das Rendern dauert ewig.
+
+   Parameter:
+    d - Dicke der Schablone
+    h - Schichte Dicke
+*/
+module schraegeKanten( d=1, h=0.05 ) {
+  for(z=[0:h:d-h]){
+    translate( v=[0,0,z]) {    
+      linear_extrude(height=h){
+        de=-abs(z-0.4*d);
+        //echo(de);
+        offset(delta=de){  
+          children( );
+        }
+      }
+    }
+  }
+}    
+
 
 
 // Nur zum Probieren einkommentieren

@@ -25,9 +25,9 @@ use <Parabel.scad>
 
 
 // Skalierungen
+xmax=3;               // Maximaler x Wert
 s=10;                 // Längeneinheit der Schablone 1 cm, scad mm
-d=1.5;                // Dicke der Schablone
-xmax=3;
+d=1.2;                // Dicke der Schablone in mm
 font="Allerta Stencil";
 
 // Erstelle die Schablone in 2D als Ebene mit Löchern für 
@@ -47,47 +47,18 @@ module schablone2D(  ) {
      // Spiegelverkehrt sqrt(x) schreiben
      translate([s*.5,s*6.2]){ rotate([180,0,90]){ 
          text(text="sqrt(x)", font=font, size=fh*0.7 ); }; };
+     // Hochschul Logo platzieren
+     translate([-3,60]) rotate(90) scale(0.4) hs_ansbach_fraese();
+     // Mich selbst verewigen
+     translate([12,60]) rotate(90) color("black"){
+         text(text="(C) Moog",halign="right", font=font, size=6 );
+      }
    } // Ende Difference   
 }
-
-
 
 /* Extrudiere aus der schablone in 2D eine 2D Schablone mit abgescrägten 
    Kanten.
 */
-module schablone3D() {
-  schraegeKanten( d, 0.05) schablone2D( ); 
-}
-
-//----------------------------------------------------
-// Schablone erzeugen, mit Prägung in der Oberfläche
-
-
-// Jetzt noch den vertieften Text in der Oberfläche
-// Von oben mit d/2 in die Schablone versenken
-difference() {
-  // Schablone selbst
-  color("red"){schablone3D();}
-
-  // Hochschul Logo platzieren
-  translate(v=[-3,59,d/2]){
-    rotate(90){
-      linear_extrude(height=d){ 
-        scale(0.4){    
-          hs_ansbach();
-        }
-      }
-    }
-  }
-  // Mich selbst verewigen
-  translate(v=[8,59,d/2]){
-    rotate(90){
-      linear_extrude(height=d){ 
-        color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=4 );}
-      }
-    }
-  }
-}
-
+schraegeKanten( d, 0.05) schablone2D( ); 
 
 

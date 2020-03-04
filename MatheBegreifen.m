@@ -18,7 +18,7 @@
 
 disp("Mathe Begreifen - Funktionen");
 
-% Latex Formel in ein png verwandeln
+% Latex Formel in ein svg verwandeln
 % 
 % Parameter
 %  formel - Die Formel, in einfachen Hochkomma damit die backslashs nicht kaputt gehen.
@@ -28,11 +28,11 @@ disp("Mathe Begreifen - Funktionen");
 %  aufraeumen - optionen, steht auf true, auf false setzen damit alle Zwischendateien erhalten bleiben
 %
 % Beispiel
-%  In Octave: latex2png( 'f(x)=\sqrt{x+1}', 'test' )
-%  In OpenSCAD: surface(file = "test.png" , invert = true);
-%    Größe in x und y entsprechend den pixeln in test.png, Höhe 0 .. 100
+%  In Octave: latex2svg( 'f(x)=\sqrt{x+1}', 'test' )
+%  In OpenSCAD: import("test.svg");
+%    Die Schrift beginnt im ursprung, die Zeichenhöhe sind 10 mm
 %
-function latex2png( formel, name, aufraeumen=true )
+function latex2svg( formel, name, aufraeumen=true )
   %Erzeuge Latex Datei
   fid=fopen([name ".tex"],"w");
   fprintf(fid,["\\documentclass{standalone}\n\\standaloneconfig{border=0.5bp}\n" ...
@@ -42,36 +42,19 @@ function latex2png( formel, name, aufraeumen=true )
   fclose(fid);
   % Übersetze Latex Datei, es entsteht <name>.pdf
   system( [ "pdflatex " name ] );
-  % Konvertiere in ein png mit ImageMagic convert
-  system( [ "convert -density 600 " name ".pdf -quality 100 " name ".png" ]);
-  % Lese die PNG Datei wieder ein und erzeuge die scad Datei
-  I=imread( [name ".png"] );
-  fid = fopen([name ".scad"],"w");
-  fprintf(fid,[
-    "// Import einer Schrift als 2D Objekt\n"...
-    "// Jeder Pixes ist ein Rechteck\n"...
-    "// Die Höhe in mm kann angegeben werden\n"...
-    "module %s_formel( height=10 ) {\n"],name);
-  % Liste der Pixel mit Grauwert <128
-  [i,j]=find(I<=128);
-  i=size(I,1)+1-i; % Invertiere für die Darstellung
-  fprintf(fid,"  p=[ ");
-  fprintf(fid,"[%d,%d], ",[j,i]');
-  fprintf(fid," ];\n");
-  % Alle Pixel aus der Liste in Rechtecke verwandeln und skalieren
-  fprintf(fid,"  scale( height/%d ) union() { \n", size(I,1) );
-  % Teile die Schleife auf, maximal 9000 Elemente in einer Liste in openSCAD
-  n=length(i);
-  for k=0:9000:n
-    fprintf(fid,...
-      "    for (i=[%d:%d]) { translate(p[i]) square( size=1 ); };\n", ...
-      k, min(k+9000,n)-1 );  
-  endfor
-  % Ende des Moduls und der Datei
-  fprintf(fid,[ "  } // ende union\n}\n\n", ...
-   "// Zum Testen folgende Zeile einkommentieren\n",...
-   "// %s_formel( 20 );\n"],name);
-  fclose(fid);
+  % Konvertiere in ein svg mit dvisvgm
+  system( [ "dvisvgm --pdf " name ".pdf" ]);
+  % Verändere das SVG
+  % - Schrift soll im Ursprung beginnen (viewBox anpassen)
+  % - Schrift soll 10 mm hoch sein (pt -> mm)
+  svg = fileread( [name ".svg"] );
+  svg = strrep( svg, "pt'", "mm'" );
+  svg = strrep( svg, "viewBox='0 -", "viewBox='0 " );
+  % Hm filewrite gibt es leider nicht ..
+  fid = fopen( [name ".svg"], "w" );
+  fwrite( fid, svg );
+  fclose( fid );
+  
   % Räume auf falls gewünscht
   if (aufraeumen)
     delete( [name ".tex"] );
@@ -79,4 +62,4 @@ function latex2png( formel, name, aufraeumen=true )
     delete( [name ".log"] );
     delete( [name ".pdf"] );
   endif 
-endfunction
+endfunction  

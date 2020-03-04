@@ -13,38 +13,41 @@
 // Um eine Kopie dieser Lizenz zu sehen, besuchen Sie
 // http://creativecommons.org/licenses/by-nc-sa/4.0/
 
+function parabelPunkte( xmax=3, s=10 ) = [ 
+    for(x=[-xmax:.1:xmax]) [s*x,s*pow(x,2)], 
+    [s*xmax,s*xmax*xmax] 
+  ];
 
-// Grundeinstellungen
-xmin=-3;              // x (y=x*x) Intervall in cm
-xmax=3;
-ymin=pow(xmin,2);     // y (y=x*x) Intervall in cm
-ymax=pow(xmax,2);
-
-// Erstelle die Schablone in 2D als Ebene mit Löchern für 
-// die Achsen, Kerben auf den Rändern zum Messen und den
-// Beschriftung x^2 und sqrt(x)
-// Parameter: Skalierung s, s=10 für Einheit 1cm (Papier) , s=100 für Einheit 1dm (Tafel)
-module schablone2D( s=1, font="Liberation Sans" ) {
-   // die quadrat Funktion von xmin bis xmax in 0.1 mm Schritten
-   points = [ 
-     for(x=[xmin:.1:xmax]) [s*x,s*pow(x,2)],
-     [s*xmax,s*ymax] ];
-   // Löcher in die Schablone  
-   difference() {
-     // Die Schablone selbst
-     polygon(points);
-     // Sichtfenster y-Achse
-	 b=0.08;
-     for(y=[1:8]) {
-       polygon( [ [-s*b,s*(y+.3)], [s*b,s*(y+.3)], [s*b,s*(y+.7)], [-s*b,s*(y+.7)]]);
-     }
-     // Text ausschneiden
-     fh=s*.8; // Texthöhe
-     // x^2 basteln
-     translate([-s*1.5,s*7.0]){ text(text="x", font=font, size=fh ); }; 
-     translate([-s*.8 ,s*7.5]){ text(text="2", font=font, size=fh*0.7 ); };
-     // Spiegelverkehrt sqrt(x) schreiben
-     translate([s*.5,s*6.2]){ rotate([180,0,90]){ 
-         text(text="sqrt(x)", font=font, size=fh*0.7 ); }; };
-   } // Ende Difference   
+module parabelUmriss( xmax=3, s=10 ) {
+  polygon( parabelPunkte(xmax,s) );
 }
+
+module parabelFenster( xmax=3, s=10 ) {
+  ymax = xmax*xmax;
+  // Sichtfenster y-Achse
+  b=0.08;
+  for(y=[1:1:floor(xmax*xmax-1)]) {
+    translate([-s*b,s*(y+.3)]) square( size=[s*2*b,s*0.4] );
+  }  
+}   
+
+module parabelFormel( xmax=3, s=10 ) {
+  ymax = xmax*xmax;
+  // Beschriftungen der Funktionen
+  fh = s*0.125*ymax;
+  translate([-1.7*fh,s*ymax-1.2*fh]) scale( [fh/10.0,fh/10.0,1] ) import( "ParabelSqr.svg" );
+  translate([0.5*fh,s*ymax-1.8*fh]) rotate([180,0,90]) scale( [fh/10.0,fh/10.0,1] ) import( "ParabelSqrt.svg" );
+}   
+
+module parabelStanz( xmax=3, s=10 ) {
+  difference() {
+    parabelUmriss( xmax=xmax, s=s );
+    parabelFenster( xmax=xmax, s=s);
+    parabelFormel( xmax=xmax, s=s);
+  }
+}   
+
+// ausprobieren
+//parabelUmriss();
+parabelStanz(xmax=3);
+
