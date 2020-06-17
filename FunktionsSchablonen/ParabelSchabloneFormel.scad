@@ -48,7 +48,7 @@ difference() {
   color("red"){schablone3D();}
 
   // Hochschul Logo platzieren
-  translate(v=[-3,65,0]){
+  translate(v=[-3,65,d-0.5]){
     rotate(90){
       linear_extrude(height=d){ 
         scale(0.45){    
@@ -58,7 +58,7 @@ difference() {
     }
   }
   // Mich selbst verewigen
-  translate(v=[12,65,0]){
+  translate(v=[12,65,d-0.5]){
     rotate(90){
       linear_extrude(height=d){ 
         color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=6 );}

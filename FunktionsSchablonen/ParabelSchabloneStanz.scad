@@ -45,12 +45,12 @@ module schablone2D(  ) {
      translate([-s*1.5,s*7.0]){ text(text="x", font=font, size=fh ); }; 
      translate([-s*.8 ,s*7.5]){ text(text="2", font=font, size=fh*0.7 ); };
      // Spiegelverkehrt sqrt(x) schreiben
-     translate([s*.5,s*6.2]){ rotate([180,0,90]){ 
-         text(text="sqrt(x)", font=font, size=fh*0.7 ); }; };
+     translate([s*.5,s*5.2]){ rotate([180,0,90]){ 
+         text(text="sqrt(x)", font=font, size=fh ); }; };
      // Hochschul Logo platzieren
      translate([-3,60]) rotate(90) scale(0.4) hs_ansbach_fraese();
      // Mich selbst verewigen
-     translate([12,60]) rotate(90) color("black"){
+     translate([9,49]) rotate(90) color("black"){
          text(text="(C) Moog",halign="right", font=font, size=6 );
       }
    } // Ende Difference   

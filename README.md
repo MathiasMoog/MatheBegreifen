@@ -10,16 +10,20 @@ Selbst virtuell in einer 3D Darstellung, z.B. mit der von mir in der Lehre einge
 
 Außerdem basteln Ingenieure - und auch manche Mathematiker - gerne. So macht es hoffentlich nicht nur dem Dozenten sondern auch den Studierenden Freude.
 
-## Verwendete Software ##
+## Verwendete Hardware und Software ##
 
 Die Zeichnungen habe ich mit [OpenSCAD ](https://www.openscad.org/ "OpenSCAD") erstellt. 
-Aufwändige mathematische Berechnungen, wie z.B. Oberflächen Berechnungen erledige ich vorab mit [GNU Octave](https://octave.org/ "GNU Octave"). Falls OpenSCAD eine .dat Datei vermisst, dann muss zuerst das entsprechende Octave Skript ausgeführt werden.
+Aufwändige mathematische Berechnungen, wie z.B. Oberflächen Berechnungen erledige ich vorab mit [GNU Octave](https://octave.org/ "GNU Octave"). Falls OpenSCAD eine .dat Datei vermisst, dann muss zuerst das entsprechende Octave Skript ausgeführt werden. 
+
+Aus OpenSCAD heraus erzeuge ich STL Dateien für den 3D Druck und SVG Dateien für die 2D Objekte die gefräst werden.
 
 Die druckbaren Objekte habe ich an der Hochschule Ansbach auf [Ultimaker](https://ultimaker.com/ "Ultimaker") Druckern oder daheim auf meinem privaten [Creality](https://creality.com/ "Creality") Ender 3 pro gedruckt.  
 
 Den gcode für die Drucker erzeuge ich immer mit [Cura](https://ultimaker.com/software/ultimaker-cura "Cura"). Für die Schablonen muss eine sehr gute Qualität verwendet werden, damit die Schriften herauskommen. Die Funktionsflächen können in einer groben Auflösung gedruckt werden, dann geht es etwas schneller. Für viele der Objekte habe ich Cura den Support aktiviert.
 
-An einzelnen Stellen habe ich Formeln als Relief gedruckt. Die Erzeugung dieser Reliefs läuft über Octave und Latex ( ich verwende [MikTex](https://miktex.org/ "MikTex")). Die so entstandene svg Datei importiere ich in OpenSCAD. 
+An der Hochschule nutze ich eine Fräse von [X-Carve](https://www.inventables.com/technologies/x-carve "X-Carve"). Zur Ansteuerung verwenden wir immer [Easel ](https://www.inventables.com/technologies/easel "Easel"). Schablonen für die Tafel habe ich als reine 2D Objekte erstellt, da sie sich leichter fräsen lassen als 3D Objekte. Dadurch entfallen leider die abgerundeten Kanten. Bei Bedarf hilft eine Oberfräse oder einfach Schmiergelpapier.
+
+An einzelnen Stellen habe ich Formeln als Relief gedruckt. Die Erzeugung dieser Reliefs läuft über Octave und Latex ( ich verwende [MikTex](https://miktex.org/ "MikTex")). Der Prozess ist in Octave automatisiert. Octave erzeugt eine tex Datei und führt nacheinander pdflatex und [dvisvgm](https://dvisvgm.de/ "dvisvgm"), anschließend korrigiert das Octave Skript die Einheit und die viewBox Einstellung in der SVG Datei. Die so entstandene svg Datei lässt sich in OpenSCAD importieren. In Latex verwende ich die Arial Schriften aus dem arev Paket. Diese serifenfreien Schriften sind besser für den Druck geeignet. Fräsen lassen sich Latex Formeln nur bedingt.
 
 ## Überblick ##
 
@@ -63,6 +67,8 @@ Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. A
    
 ### Drucken ###
 
+Wie oben beschrieben habe ich die Objekte auf verschiedenen Druckern produziert. Hier ein paar Anmerkungen zu den Entwürfen:
+
 * "Gravierte" Texte: 
     * Mindesthöhe 6 mm für normale Fonts, Latex Formeln größer, die sind deutlich feiner
 	* 3 bis 5 mm einsinken lassen, mehr ist nicht notwendig
@@ -74,11 +80,24 @@ Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. A
 
 ### Fräsen ###
 
+Schablonen für die Tafel sind viel zu groß für den 3D Druck. Daher habe ich sie gefräst. Sie sind reine 2D Objekte. Meist bestehen sie aus zwei Teilen.
+
+* Trennen der Schablonen in zwei Teile
+   * Löcher innen (Easel "Clear out a pocket", 1. Schritt beim Fräsen)
+   * Außenkontur (Easel "Cut on shape path", 2. Schritt beim Fräsen)
+   * Aufpassen das keine Reste weg fliegen. Notfalls mit kleinen Verbindungen sichern.
+* Export als SVG aus OpenSCAD
+  Zu Positionierung jeweils ein Dummy Objekt unten Links anlegen sonst verrutschen die beiden svgs für innen und außen gegeneinander.   
+
+
 
 
 ### Didaktik ###
 
+Die Objekte bringe ich zur Illustration von einzelnen Themen mit in die Vorlesung. Z. B. die e und ln Schablone eignet sich zusätzlich zum Erklären der Umkehrfuntion.
+
 * Mehrere drucken, damit es schneller durch die Reihen läuft
+* Schablonen für Papier und Tafel erstellen, dann kann ich es an der Tafel vorführen während die kleinen Schablonen durch die Reihen wandern.
 
 ## Nachwort ##
 

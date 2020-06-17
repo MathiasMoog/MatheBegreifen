@@ -12,3 +12,5 @@
 *.svg
 # Erzugte dxf Dateien
 *.dxf
+# Erzeugte tex Dateien für die Formeln
+*.tex

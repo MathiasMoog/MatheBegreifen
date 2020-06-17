@@ -1,4 +1,6 @@
 // Sattelpunkt als 3D Objekt, Funktionn f(x,y)=-x^2+y^2
+//
+// Der obere Teil ist etwas kürzer.
 // 
 // Copyright, CC-BY-NC-SA, 2020, Mathias Moog, 
 // mathias.moog@hs-ansbach.de, Hochschule Ansbach, Deutschland, 
@@ -11,6 +13,9 @@
 
 // Achtung: Zuerst die Oberflächen mit Octave erzeugen
 /// Sattel.m erzeugen Sattel?.dat
+
+// Auf meinem Ender 3 pro gedruckt, 
+// Brim und Support in Cura aktiviert.
 
 // Einstellung, mit Octave Abgleichen
 include <SattelS.dat>
@@ -26,6 +31,8 @@ intersection() {
       }
     }
   }
-  cylinder(r=s*(r+d),h=s*(zmax-zmin));
+  //cylinder(r=s*(r+d),h=s*(zmax-zmin));
+  // Scheide es zu, damit es sich leichter drucken lässt.
+  w=50;translate([0,0,w])cylinder(r=s*(r+d),h=s*(zmax-zmin)-2*w);
 }
 

@@ -70,7 +70,7 @@ module schraegeKanten( d=1, h=0.05 ) {
   for(z=[0:h:d-h]){
     translate( v=[0,0,z]) {    
       linear_extrude(height=h){
-        de=-abs(z-0.4*d);
+        de=(-abs(z+h/2-0.5*d)+h/2)*0.45;
         //echo(de);
         offset(delta=de){  
           children( );

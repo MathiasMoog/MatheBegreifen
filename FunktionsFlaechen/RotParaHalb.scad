@@ -25,29 +25,34 @@ $fn=40;     // Damit es hübscher wird.
 /* Schneide den Rotationsparaboliden in der Mitte durch und lege ihn
    um. Schneide anschließend die Nasenlöcher aus
  */
-difference() {
-  // Halbiere Rotationsparboloid und lege um
-  rotate([90,0,0]){
-    intersection() {
-      rot_para();
-      translate([-10*(r+d),0,0]){
-        cube([20*(r+d),20*(r+d),10*(r+d)*(r+d)]);
+module halber()  {
+  difference() {
+    // Halbiere Rotationsparboloid und lege um
+    rotate([90,0,0]){
+      intersection() {
+        rot_para();
+        translate([-10*(r+d),0,0]){
+          cube([20*(r+d),20*(r+d),10*(r+d)*(r+d)]);
+        }
+      }
+    }
+    // Nasenlöcher, x>0
+    for(y=[4,10]){
+      translate([10*sqrt(r*r-y)-1.6*nase_r,-10*y,-nase_l/2]){ 
+        cylinder(r=nase_r*1.2,h=nase_l*1.6);
       }
     }
   }
-  // Nasenlöcher, x>0
+
+  // Nasen, x<0
   for(y=[4,10]){
-    translate([10*sqrt(r*r-y)-1.6*nase_r,-10*y,-nase_l/2]){ 
-      cylinder(r=nase_r*1.2,h=nase_l*1.6);
+    translate([-10*sqrt(r*r-y)+1.6*nase_r,-10*y,-nase_l]){ 
+      cylinder(r=nase_r,h=nase_l);
     }
   }
-}
+} // Ende halber()
 
-// Nasen, x<0
-for(y=[4,10]){
-  translate([-10*sqrt(r*r-y)+1.6*nase_r,-10*y,-nase_l]){ 
-    cylinder(r=nase_r,h=nase_l);
-  }
-}
-
+// Es wird einer Original und einer gespiegelt benötigt.
+//halber();
+mirror([1,0,0]) halber(); // An der y-z-Ebene gespiegelt
  
