@@ -1,4 +1,4 @@
-#Lizenz#
+# Lizenz #
 
 Dieser Code steht unter der Creative-Commons-Lizenz Namensnennung - Nicht-kommerziell - 
 Weitergabe unter gleichen Bedingungen 4.0 International. 
