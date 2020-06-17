@@ -52,7 +52,6 @@ module halber()  {
   }
 } // Ende halber()
 
-// Es wird einer Original und einer gespiegelt benötigt.
-//halber();
-mirror([1,0,0]) halber(); // An der y-z-Ebene gespiegelt
+// Zwei halbe ergeben einen ganzen.
+halber();
  
