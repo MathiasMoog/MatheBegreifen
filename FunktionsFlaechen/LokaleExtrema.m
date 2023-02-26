@@ -67,6 +67,7 @@ txy = linspace( -r, r, 81)';
 [xx, yy] = meshgrid( txy, txy ); % ein Gitter in der x y Ebene erzeugen
 zz = h(xx,yy);
 mesh( txy, txy, zz );
+print("-dpng","LokaleExtremaMesh");
 
 % Speichere die Oberfläche
 dlmwrite("LokaleExtremaO.dat",zz," ");

@@ -1,7 +1,7 @@
 % Rotations Paraboloid
-% Erstelle Oberfläche mit konstanter Dicke in Normalenrichtung.
+% Erstelle OberflÃ¤che mit konstanter Dicke in Normalenrichtung.
 %
-% Dieses Octave Skript erzeugt mehrere RotPara?.dat Dateien. Es muss ausgeführt werden
+% Dieses Octave Skript erzeugt mehrere RotPara?.dat Dateien. Es muss ausgefÃ¼hrt werden
 % - bevor - die OpenSCAD Skripte laufen.
 %
 % Copyright 2019 bei Mathias Moog, Hochschule Ansbach, Deutschland, mathias.moog@hs-ansbach.de
@@ -10,9 +10,9 @@
 % Weitergabe unter gleichen Bedingungen 4.0 International. 
 % Um eine Kopie dieser Lizenz zu sehen, besuchen Sie http://creativecommons.org/licenses/by-nc-sa/4.0/
 %
-% Diesen Code habe ich für die Verwendung in meinen Lehrveranstaltungen und für Studierende
+% Diesen Code habe ich fÃ¼r die Verwendung in meinen Lehrveranstaltungen und fÃ¼r Studierende
 % an der Hochschule Ansbach geschrieben. Ich kann nicht garantieren, dass er fehlerfrei funktioniert.
-% Für Hinweise und Verbesserungsvorschläge bin ich dankbar.
+% FÃ¼r Hinweise und VerbesserungsvorschlÃ¤ge bin ich dankbar.
 %
 % Ich selbst arbeite vorwiegend mit Octave, https://www.gnu.org/software/octave/, da dies freie 
 % Software ist und sie auf jedem Rechner installiert werden kann. 
@@ -24,10 +24,10 @@ global f d;
 % Die Funktion, hier ein Rotationsparaboloid
 f=@(x,y)25-x.^2-y.^2;
 
-% Die Dicke der Oberfläche in cm
+% Die Dicke der OberflÃ¤che in cm
 d=0.3;
 
-% Berechne nach "unten" zeigende Normale mit der Länge d
+% Berechne nach "unten" zeigende Normale mit der LÃ¤nge d
 function n=dnf(x,y)
   global d;
   fx=-2*x;
@@ -36,7 +36,7 @@ function n=dnf(x,y)
   n*=-d/norm(n);
 endfunction
 
-% Untere Begrenzung der Fläche
+% Untere Begrenzung der FlÃ¤che
 function z=fu(x,y)
   global f;
   n=dnf(x,y);
@@ -44,10 +44,10 @@ function z=fu(x,y)
   z=fminsearch(g,f(x,y)-n(3));
 endfunction
 
-% Zeichne die Oberfläche
+% Zeichne die OberflÃ¤che
 txy = linspace( -4, 4, 41)'; 
 [xx, yy] = meshgrid( txy, txy ); % ein Gitter in der x y Ebene erzeugen
-% Die z werte für jeden Punkt im Gitter ausrechnen
+% Die z werte fÃ¼r jeden Punkt im Gitter ausrechnen
 zz = f(xx,yy);
 mesh( txy, txy, zz )
 hold on;
@@ -75,8 +75,8 @@ mesh( txy, txy, zu )
 
 hold off;
 
-% Speichere die Oberflächen
-% Die dat Dateien enthalten die Oberflächen Informationen für OpenSCAD
+% Speichere die OberflÃ¤chen
+% Die dat Dateien enthalten die OberflÃ¤chen Informationen fÃ¼r OpenSCAD
 d=mean(diff(txy))
 n=length(txy)
 dlmwrite("RotParaO.dat",zz," ");

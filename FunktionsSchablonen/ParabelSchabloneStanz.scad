@@ -39,18 +39,12 @@ module schablone2D(  ) {
      parabelUmriss( xmax=xmax, s=s );
      // Fenster ausschneiden
      parabelFenster( xmax=xmax, s=s);
-     // Text ausschneiden
-     fh=s*.8; // Texthöhe
-     // x^2 basteln
-     translate([-s*1.5,s*7.0]){ text(text="x", font=font, size=fh ); }; 
-     translate([-s*.8 ,s*7.5]){ text(text="2", font=font, size=fh*0.7 ); };
-     // Spiegelverkehrt sqrt(x) schreiben
-     translate([s*.5,s*5.2]){ rotate([180,0,90]){ 
-         text(text="sqrt(x)", font=font, size=fh ); }; };
+    // x^2 und Wurzel Formel
+    parabelFormel( xmax=xmax*0.97, s=s);
      // Hochschul Logo platzieren
      translate([-3,60]) rotate(90) scale(0.4) hs_ansbach_fraese();
      // Mich selbst verewigen
-     translate([9,49]) rotate(90) color("black"){
+     translate([10,60]) rotate(90) color("black"){
          text(text="(C) Moog",halign="right", font=font, size=6 );
       }
    } // Ende Difference   
