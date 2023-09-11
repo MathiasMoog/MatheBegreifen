@@ -47,6 +47,6 @@ difference() { // only for inscription
   // inscription on the sides
   translate([10,h/2,5]) rotate([90,0,0]) mtext("\u2192 x ");
   translate([50,h/2,20]) rotate([90,-90,0]) mtext("\u2192 z ");
-  translate([-h/2,80,20]) rotate([90,-90,90]) mtext("\u2192 z ");
-  translate([-h/2,20,10]) rotate([90,0,90]) mtext("\u2192 y ");
+  translate([h/2,60,10]) rotate([90,0,-90]) mtext(" y \u2190");
+  translate([h/2,80,20]) rotate([90,-90,-90]) mtext("\u2192 z ");
 }

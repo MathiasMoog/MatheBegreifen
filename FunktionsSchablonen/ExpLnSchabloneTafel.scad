@@ -1,5 +1,7 @@
 // Schablone für die Exponential und Logarithmus Funktion
 //
+// Große Schablone zum Fräsen für die Tafel
+//
 // Mit der Oberseite kann die Exponential Funktion gezeichnet werden.
 // Die Unterseite wird für den Logarithmus verwendet.
 //
@@ -16,12 +18,8 @@
 // Um eine Kopie dieser Lizenz zu sehen, besuchen Sie
 // http://creativecommons.org/licenses/by-nc-sa/4.0/
 
-// Diverse Vorlagen laden
-include <../MatheBegreifen.scad>
-
-
 // Skalierungen
-s=10;               // Längeneinheit der Schablone 1 cm, scad mm
+s=100;               // Längeneinheit der Schablone 1 cm, scad mm
 xmin=-2;            // x (y=exp(x)) Intervall in cm
 xmax=2;
 ymin=exp(xmin);     // y (y=exp(x)) Intervall in cm
@@ -29,38 +27,40 @@ ymax=exp(xmax);
 d=1.5;              // Dicke der Schablone
 f="Allerta Stencil"; // Stencil Font, sonst Problem mit dem e
 
-$fn=30;
-
 // Die benötigten Basis Module nachladen
 include <ExpLnSchabloneModule.scad>
 
-//----------------------------------------------------
-// Schablone erzeugen
-
-
-// Jetzt noch den vertieften Text in der Oberfläche
-// Von oben mit d/2 in die Schablone versenken
-difference() {
-  // Schablone selbst
-  color("red"){schablone3D();}
-
+// Schrift komplett durchfräsen
+module innen() {
+  schablone2Dinnen();
   // Hochschul Logo platzieren
-  translate(v=[-3,50,d/2]){
+  translate(v=[-.3*s,5*s]){
     rotate(90){
-      linear_extrude(height=d){ 
-        scale(0.4){    
-          hs_ansbach();
+      scale(0.04*s){    
+          hs_ansbach_fraese(f);
         }
       }
-    }
   }
   // Mich selbst verewigen
-  translate(v=[8,50,d/2]){
+  translate(v=[.8*s,5*s]){
     rotate(90){
-      linear_extrude(height=d){ 
-        // Hier kein Stencil Font, Allerta Stencil hat kein Copyright Zeichen
-        color("black"){text(text="© Moog",halign="right", font="Liberation Sans", size=4 );}
+        color("black"){text(text="(c) Moog",halign="right", font=f, size=.4*s );}
       }
-    }
   }
 }
+
+//----------------------------------------------------
+/* Schablone erzeugen
+   Eine der beiden (Außen oder innen) einkommentieren,
+   erzeugen lassen, als svg speichern. 
+*/
+
+
+// Markierung damit die Exporte für Innen und Außen
+// sich genau übereinander platzieren lassen
+translate([s*xmin,0]) square(5);
+
+// Außenkontur
+schablone2Dumriss();
+// Durchbrüche im inneren
+//innen();
