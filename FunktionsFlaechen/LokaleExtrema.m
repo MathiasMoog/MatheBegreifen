@@ -1,7 +1,7 @@
 % Lokale Extrema
-% Erstelle Oberfläche mit mehreren lokalen Extrema
+% Erstelle OberflÃ¤che mit mehreren lokalen Extrema
 %
-% Dieses Octave Skript erzeugt mehrere LokaleExtrema?.dat Dateien. Es muss ausgeführt werden
+% Dieses Octave Skript erzeugt mehrere LokaleExtrema?.dat Dateien. Es muss ausgefÃ¼hrt werden
 % - bevor - die OpenSCAD Skripte laufen.
 %
 % Copyright 2019 bei Mathias Moog, Hochschule Ansbach, Deutschland, mathias.moog@hs-ansbach.de
@@ -10,9 +10,9 @@
 % Weitergabe unter gleichen Bedingungen 4.0 International. 
 % Um eine Kopie dieser Lizenz zu sehen, besuchen Sie http://creativecommons.org/licenses/by-nc-sa/4.0/
 %
-% Diesen Code habe ich für die Verwendung in meinen Lehrveranstaltungen und für Studierende
+% Diesen Code habe ich fÃ¼r die Verwendung in meinen Lehrveranstaltungen und fÃ¼r Studierende
 % an der Hochschule Ansbach geschrieben. Ich kann nicht garantieren, dass er fehlerfrei funktioniert.
-% Für Hinweise und Verbesserungsvorschläge bin ich dankbar.
+% FÃ¼r Hinweise und VerbesserungsvorschlÃ¤ge bin ich dankbar.
 %
 % Ich selbst arbeite vorwiegend mit Octave, https://www.gnu.org/software/octave/, da dies freie 
 % Software ist und sie auf jedem Rechner installiert werden kann. 
@@ -21,7 +21,7 @@
 % Lade Funktionen nach
 run ../MatheBegreifen
 
-% Lade das Paket für die symbolischen Berechnung
+% Lade das Paket fÃ¼r die symbolischen Berechnung
 pkg load symbolic;
 
 % Vereinbare Symbolische Variablen
@@ -35,7 +35,7 @@ f(x,y) = 4+a1*x + a2*x^2 + a3*x^3 + x^4/100 + b1*y+b2*y^2+b3*y^3+y^4/100 ...
 fx(x,y)  = diff(f,x)
 fy(x,y)  = diff(f,y) 
 
-% Gleichungen für die lokalen Extrema
+% Gleichungen fÃ¼r die lokalen Extrema
 % Zwei Maxima
 gl1=f(3,3)==5;
 gl2=fx(3,3)==0;
@@ -51,7 +51,7 @@ gl10=f(-3,3)==1/2;
 gl11=fx(-3,3)==0;
 gl12=fy(-3,3)==0;
 
-% Auflösen
+% AuflÃ¶sen
 [a1 a2 a3 b1 b2 b3 c1 c2 c3 c4 c5 c6] = solve(gl1,gl2,gl3,gl4,gl5,gl6,gl7,gl8,gl9,gl10,gl11,gl12, ...
  a1, a2, a3, b1, b2, b3, c1, c2, c3, c4, c5, c6)
 % Parameter einsetzen 
@@ -62,20 +62,20 @@ h = function_handle(g);
 
 % Zeichnen
 r=4; % Quadrat
-% Zeichne die Oberfläche
+% Zeichne die OberflÃ¤che
 txy = linspace( -r, r, 81)'; 
 [xx, yy] = meshgrid( txy, txy ); % ein Gitter in der x y Ebene erzeugen
 zz = h(xx,yy);
 mesh( txy, txy, zz );
 print("-dpng","LokaleExtremaMesh");
 
-% Speichere die Oberfläche
+% Speichere die OberflÃ¤che
 dlmwrite("LokaleExtremaO.dat",zz," ");
 
-% Speicher die hier gewählten Einstellungen in einer Datei
+% Speicher die hier gewÃ¤hlten Einstellungen in einer Datei
 fid = fopen("LokaleExtremaS.dat","w");
 fprintf(fid,"d=%f; // Abstand der Punkte\n",mean(diff(txy)));
-fprintf(fid,"r=%f; // Halbe Kanntelänge der Grundfläche\n",r);
+fprintf(fid,"r=%f; // Halbe KanntelÃ¤nge der GrundflÃ¤che\n",r);
 fclose(fid);
 
 % Erzeuge ein svg der Formel

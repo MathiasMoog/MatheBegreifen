@@ -50,6 +50,21 @@ Einige sind zerlegbar, so z.B der Roationsparaboloid, der damit auch als Parabel
 
 Diese Objekte sind in der Regel mit der Einheit von 1 cm erstellt und so gewählt, dass die auf einem "normalen" 3D Drucker gedruckt werden können.
 
+Hier ein paar Erläuterungen:
+
+* Ganzzahlige linear Optimierung
+   * Zerlegbarer Simplex [FunktionsFlaechen/IntegerProgrammingExample.scad]
+   * Beispiel Problem von der Wikipedia Seite: [https://en.wikipedia.org/wiki/Integer_programming]
+   * Einzelteile farbig drucken 
+   * Nutzbar für die Erklärung des "Branch and Bound" Verfahrens
+   ![](FunktionsFlaechen/IntegerProgrammingExample.png)
+* Lineare Optimierung, Simplex
+   * Zielfunktion $f(x,y) = 1.4 x + 0.8 y$   
+   * Ungleichungen  $30 x -10 y \le 1800$, $40 x + 10 y \le 3100$, $30 x + 40 y \le 4600$, $-10x + 20 y \le 1800$ sowie $x \ge 0$ und $y \ge 0$
+   * Zum Erklären des Simplex Verfahrens nutzen. Folge in aufsteigender Richtung den Ecken bis das Maximum erreicht ist.
+   ![](FunktionsFlaechen/Simplex.png)
+
+
 ### Technik ###
 
 Beispiele aus der Technik, die in der Ingenieur Mathematik vorkommen, wie z.B. Abrollkurven.
